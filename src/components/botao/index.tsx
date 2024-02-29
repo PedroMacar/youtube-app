@@ -7,7 +7,7 @@ interface BotaoProps {
 
 const Botao: React.FC<BotaoProps> = ({ children, className }) => {
   return (
-    <div className={`flex w-10 h-10 hover:bg-slate-300 justify-center items-center rounded-full ${className}`}>
+    <div className={`group flex w-10 h-10 hover:bg-slate-300 dark:hover:bg-btmenu justify-center items-center rounded-full ${className}`}>
       {children}
     </div>
   );
@@ -15,10 +15,11 @@ const Botao: React.FC<BotaoProps> = ({ children, className }) => {
 
 interface BotaoIconProps {
   children: ReactNode;
+  className?: string | ""
 }
 
-const BotaoIcon: React.FC<BotaoIconProps> = ({ children }) => {
-  return <span>{children}</span>;
+const BotaoIcon: React.FC<BotaoIconProps> = ({ children,className }) => {
+  return <span className={`dark:fill-white  ${className}`}>{children}</span>;
 };
 
 interface BotaoLabelProps {

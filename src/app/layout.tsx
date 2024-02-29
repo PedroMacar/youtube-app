@@ -37,23 +37,23 @@ export default function RootLayout({
         )}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="ligth"
+            defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-          <div className="min-h-screen flex flex-col p-0  font-sans antialiased">
+          <div className="min-h-screen flex flex-col p-0 dark:bg-background font-sans antialiased">
 
           
               <div className="py-0 px-5">
                 <Menu/>
               </div>
               <div className="flex">
-                <div className="w-[22%] flex-shrink-0">
+                <div className="w-[18%] flex-shrink-0 hidden lg:block off">
                   <ScrollArea className="pr-9 py-4 h-[90vh] w-full">
                   <Sidebar/>
                   </ScrollArea>
                 </div>
-              <div className="flex-1"> {children}</div>
+                 <div className="flex-1"> {children}</div>
               </div>
             </div>
             

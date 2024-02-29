@@ -18,7 +18,7 @@ const Menu: React.FC = () => {
 
 
                 <Botao className=''>
-                    <BotaoIcon><HamburgerIcon></HamburgerIcon></BotaoIcon>
+                    <BotaoIcon className=""><HamburgerIcon></HamburgerIcon></BotaoIcon>
                 </Botao>
 
                 <Image className='my-[18px] mx-1' src="/menu/logo.svg" width={90} height={20} alt=''></Image>

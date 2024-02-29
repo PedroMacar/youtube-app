@@ -10,9 +10,13 @@
 
     --card:#ffffff;
     --card-foreground: #0f0f0f;
+
+    --btmenu: #00000020;
  
     --popover: #ffffff;
     --popover-foreground: #0f0f0f;
+
+    --desc: #606060;
  
     --primary: #ffffff;
     --primary-foreground: #0f0f0f;
@@ -39,6 +43,10 @@
   .dark {
     --background: #0f0f0f;
     --foreground: #fafafa;
+
+    --desc: #aaaaaa;
+
+    --bt-menu: #ffffff20;
  
     --card: #0f0f0f;
     --card-foreground: #fafafa;

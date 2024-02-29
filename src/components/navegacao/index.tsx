@@ -1,31 +1,23 @@
 'use client'
 import * as React from "react"
 import Link from "next/link"
-import { useEffect, useState } from "react";
-
+import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils"
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
-import { HomeIcon } from "@radix-ui/react-icons";
-import { HomeIconFull } from "../icons";
+import {NavigationMenuItem} from "@/components/ui/navigation-menu"
+import { HomeIconFull, HomeIcon, InscricoesIcon, InscricoesIconFull } from "../icons";
 
-interface entrada{
-    className?: string | "";
+interface Entrada {
+    className?: string;
 }
 
-const components: { title: string; href: string; description: string; icon: React.ReactNode; iconActive?: React.ReactNode | null, }[] = [
+const components: { title: string; href: string; description: string; icon: React.ReactNode; iconActive: React.ReactNode }[] = [
     {
       title: "Home",
       href: "/",
       description:
         "A modal dialog that interrupts the user with important content and expects a response.",
       icon: <HomeIcon/>,
-      iconActive: <HomeIconFull></HomeIconFull>
+      iconActive: <HomeIconFull/>
     },
     {
       title: "Shorts",
@@ -33,66 +25,54 @@ const components: { title: string; href: string; description: string; icon: Reac
       description:
         "For sighted users to preview content available behind a link.",
       icon: <HomeIcon/>,
-      iconActive: <HomeIconFull></HomeIconFull>
+      iconActive: <HomeIconFull/>
+    },
+    {
+      title: "Inscrições",
+      href: "/Inscricoes",
+      description:
+        "For sighted users to preview content available behind a link.",
+      icon: <InscricoesIcon/>,
+      iconActive: <InscricoesIconFull/>
     }
-  ]
-export function NavigationMenuDemo({className}:entrada ){
-    const [activeButton, setActiveButton] = useState(getCurrentPageTitle());
+];
 
-    useEffect(() => {
-      const currentPage = components.find(
-        (component) => window.location.pathname === component.href
-      );
-      setActiveButton(currentPage ? currentPage.title : components[0].title);
-    }, []);
-  
-    function getCurrentPageTitle() {
-      const currentPage = components.find(
-        (component) => window.location.pathname === component.href
-      );
-      return currentPage ? currentPage.title : components[0].title;
-    }
+export function NavigationMenuDemo({className}: Entrada) {
+  const pathname = usePathname()
+
   return (
-  <>
-        {components.map((component) => (
-          <ListItem
-            key={component.title}
-            title={component.title}
-            href={component.href}
-            icon={component.icon}
-            iconActive={component.iconActive}
-            description={component.description}
-            isActive={activeButton === component.title}
-          onClick={() => setActiveButton(component.title)}
-          />
-        ))}
-      </>
-  )
+    <>
+      {components.map((component, index) => (
+        <ListItem
+          key={component.title}
+          title={component.title}
+          href={component.href}
+          icon={component.icon}
+          iconActive={component.iconActive}
+          isActive={pathname === component.href || (index === 0 && pathname === "/")}
+        />
+      ))}
+    </>
+  );
 }
 
 interface ListItemProps {
   title: string;
-  description: string;
-  isActive?: boolean;
   icon: React.ReactNode;
   href: string;
-  iconActive?: React.ReactNode | null;
+  iconActive: React.ReactNode;
+  isActive: boolean;
   onClick?: () => void;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ title, href, description, icon, isActive, iconActive }) => {
-  return (
-    
-      <NavigationMenuItem>
-        <Link href={href} className={cn("flex shadow-none justify-start gap-6 p-4 bg-zinc-100 space-y-1 rounded-md leading-none no-underline outline-none transition-colors", {
-          'bg-accent text-accent-foreground': isActive,
-          'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground': !isActive,
-        })}>
-           
-            {isActive ? <i>{iconActive}</i> : <i>{icon}</i>}
+const ListItem: React.FC<ListItemProps> = ({ title, href, icon, iconActive, isActive }) => {
+  return ( 
+    <NavigationMenuItem>
+      <Link href={href}> <div className={cn("flex px-4 shadow-none items-center justify-start gap-5 py-2 bg-zinc-100 dark:bg-transparent rounded-lg dark:fill-white  transition-colors dark:hover:bg-btmenu", { 'dark:bg-btmenu': isActive })}>
+          <span className="w-6 h-6">{isActive ? iconActive : icon}</span>
           <span className="text-sm font-medium leading-none">{title}</span>
+          </div>
       </Link>
-      </NavigationMenuItem>
-   
-  )
-}
+    </NavigationMenuItem>
+  );
+};

@@ -28,10 +28,12 @@ const config = {
         ring: "var(--ring",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        btmenu: "var(--bt-menu)",
         primary: {
-          DEFAULT: "ar(--primary)",
+          DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
         },
+        
         secondary: {
           DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
